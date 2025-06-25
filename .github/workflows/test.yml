@@ -1,4 +1,4 @@
-name: Run Tests in Docker
+name: Run Tests in Docker and Deploy Coverage Report
 
 on:
   push:
@@ -26,5 +26,11 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        pytest --cov=covid --cov-report=term-missing
+        pytest --cov=covid --cov-report=html
+
+    - name: Upload coverage report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./htmlcov
 
