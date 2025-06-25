@@ -1,0 +1,5 @@
+{
+  "tests/test_analyzer.py::test_query_top_countries": true,
+  "tests/test_downloader.py::test_downloader": true,
+  "tests/test_loader.py::test_load_into_db": true
+}

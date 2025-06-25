@@ -1,0 +1,22 @@
+cat <<EOF > .gitignore
+# Python
+__pycache__/
+*.pyc
+*.sqlite3
+covid.db
+*.db
+*.log
+
+# Virtual Environment
+venv/
+
+# Pytest
+.pytest_cache/
+htmlcov/
+reports/
+
+# Data
+data/*.csv
+
+EOF
+
