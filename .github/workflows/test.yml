@@ -1,4 +1,4 @@
-name: Run Tests in Docker and Deploy Coverage HTML Report
+name: Run Tests and Deploy Coverage Report
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,15 +23,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install pytest pytest-cov
 
-    - name: Run tests with coverage
+    - name: Run tests and generate HTML coverage
       run: |
         pytest --cov=covid --cov-report=html
+        echo "Generated files:"
         ls -l $GITHUB_WORKSPACE/htmlcov/
 
-    - name: Confirm htmlcov directory
-      run: ls -la htmlcov
-    
     - name: Upload coverage report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
