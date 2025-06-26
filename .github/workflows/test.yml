@@ -28,14 +28,18 @@ jobs:
     - name: Run tests and generate HTML coverage
       run: |
         pytest --cov=covid --cov-report=html
-        echo "Generated files:"
-        ls -l $GITHUB_WORKSPACE/htmlcov/
+        ls -l htmlcov/
 
-    - name: Upload coverage report to GitHub Pages
+    - name: Copy coverage report to root folder
+      run: |
+        mkdir public
+        cp -r htmlcov/* public/
+
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ github.workspace }}/htmlcov
+        publish_dir: ./public
         publish_branch: gh-pages
         force_orphan: true
 
