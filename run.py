@@ -2,12 +2,17 @@ from covid.downloader import download_csv
 from covid.loader import load_into_db
 from covid.analyzer import query_top_countries
 from covid.logger import get_logger
+import os
+
+DATA_DIR = "data"
+os.makedirs(DATA_DIR, exist_ok=True)
+
+csv_file = os.path.join(DATA_DIR, "owid.csv")
 
 logger = get_logger()
 
 def main():
     url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
-    csv_file = "data/owid.csv"
     db_file = "covid.db"
 
     download_csv(url, csv_file)
