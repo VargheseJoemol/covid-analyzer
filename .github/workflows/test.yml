@@ -27,6 +27,7 @@ jobs:
     - name: Run tests with coverage
       run: |
         pytest --cov=covid --cov-report=html
+        ls -l $GITHUB_WORKSPACE/htmlcov/
 
     - name: Confirm htmlcov directory
       run: ls -la htmlcov
@@ -35,6 +36,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./htmlcov
+        publish_dir: ${{ github.workspace }}/htmlcov
         publish_branch: gh-pages
 
