@@ -43,3 +43,9 @@ jobs:
         publish_branch: gh-pages
         force_orphan: true
 
+    - name: Run main app and show logs
+      run: |
+        python run.py
+        echo "------ run.py logs ------"
+        cat covid.log
+
